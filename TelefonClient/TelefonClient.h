@@ -2,10 +2,6 @@
 #include <string>
 using namespace std;
 
-// Zieladresse des Servers
-constexpr auto SERVERIP = "127.0.0.1";  // Konstante für den IP-Adresse
-constexpr int SERVERPORT = 5586;		// Konstante für den Server-Port - zentraler Ort fuer die Port-Nummer
-
 class Socket;
 
 class TelefonClient

@@ -2,6 +2,10 @@
 #include "TelefonClient.h"
 using namespace std;
 
+using namespace std;
+#define SERVERPORT 54321
+#define SERVERIP "127.0.0.1"
+
 int main()
 {
 	// Mehr sollte in der main() nicht stehen!
