@@ -4,13 +4,14 @@
 #include "TelefonClient.h"
 using namespace std;
 
-bool TelefonClient::menu(){
+bool TelefonClient::menu()
+{
 
 	return 0;
 }
 
-bool TelefonClient::verbinden(string server, int port){
-
+bool TelefonClient::verbinden(string server, int port)
+{
 	client_sock = new Socket(server, port);
 
 	string text="", antwort="";
@@ -31,7 +32,7 @@ bool TelefonClient::verbinden(string server, int port){
 
 		cout << "Telefonnummer von " << text << " lautet: " <<  antwort << endl;
 		cout << endl;
-	}while(!text.empty() && text != "EXIT");
+	}while(text != "EXIT");
 
 	return true;
 }

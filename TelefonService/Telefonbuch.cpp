@@ -77,7 +77,6 @@ void Telefonbuch::sortierenNachNamen()
 	}
 }
 
-
 void Telefonbuch::toString()
 {
 	cout << "-----Telefonbucheintraege--------" << endl;

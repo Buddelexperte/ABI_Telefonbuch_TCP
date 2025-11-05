@@ -5,8 +5,8 @@
 using namespace std;
 
 TelefonbuchServer::TelefonbuchServer(int port)
-	: daten(new Telefonbuch)
 {
+	daten = new Telefonbuch;
 	server = new ServerSocket(port);
 
 	daten->toString();
@@ -20,14 +20,14 @@ TelefonbuchServer::~TelefonbuchServer(void)
 
 void TelefonbuchServer::start()
 {
-	string anfrage = "Name";
+	string anfrage;
 	string antwort;
 
 	Socket* work = server->accept();
 
 	cout << "Client verbunden!" << endl;
 
-	while (!anfrage.empty() && anfrage != "EXIT")
+	while (anfrage != "EXIT")
 	{
 		while(!work->dataAvailable()){}
 
