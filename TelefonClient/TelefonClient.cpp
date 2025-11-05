@@ -11,33 +11,34 @@ bool TelefonClient::menu(){
 
 bool TelefonClient::verbinden(string server, int port){
 
-	// 2) Socket() - erzeugt einen Clientsocket
-	// ToDo
+	client_sock = new Socket(server, port);
+
 	string text="", antwort="";
 	cout<<"Warte auf Serververbindung"<<endl;
 
-	// 4) connect() - liefert true, wenn er einen Verbindung zu Server gefunden hat
-	// ToDo
+	while (!client_sock->connect())
+	{}
+
 	cout<<"\nVerbunden mit dem Server"<<endl;
 
 	do{
-		cout << "Name eingeben: - um die Telefonnummer abzurufen" << endl;
+		cout << "Name eingeben: - um die Telefonnummer abzurufen\n>> " << flush;
 		cin >> text;
+		
+		client_sock->write(text);
 
-		// 5a) Kommunikation mit read() write()
-		// ToDo
+		antwort = client_sock->readLine();
 
 		cout << "Telefonnummer von " << text << " lautet: " <<  antwort << endl;
 		cout << endl;
-	}while(text != "???");
+	}while(!text.empty() && text != "EXIT");
 
 	return true;
 }
 
 bool TelefonClient::abmelden()
 {
-	// 6) Client abmelden
-	// ToDo
+	client_sock->close();
 	return true;
 }
 

@@ -5,9 +5,9 @@
 using namespace std;
 
 TelefonbuchServer::TelefonbuchServer(int port)
+	: daten(new Telefonbuch)
 {
-	// 1) ServerSocket() - erzeugt einen Serversocket
-	// ToDo
+	server = new ServerSocket(port);
 
 	daten->toString();
 }
@@ -20,27 +20,29 @@ TelefonbuchServer::~TelefonbuchServer(void)
 
 void TelefonbuchServer::start()
 {
-	string anfrageName = "";
+	string anfrage = "Name";
 	string antwort;
-	// ToDo
 
-		// 3) accept() - erzeugt einen ArbeitsSocket (workSocket), wenn ein Client eine Verbindung anfragt
-		//    Der Aufruf von accept() blockiert solange, bis ein Client Verbindung aufnimmt
-
-		// ToDo
+	Socket* work = server->accept();
 
 	cout << "Client verbunden!" << endl;
 
-	while (anfrageName != "???")
+	while (!anfrage.empty() && anfrage != "EXIT")
 	{
-		// 5b) Kommunikation mit read() write()
-		// ToDo
+		while(!work->dataAvailable()){}
 
+		anfrage = work->readLine();
+
+		std::cout << anfrage;
+
+		if (anfrage == "\0" || anfrage == "EXIT") break;
+
+		string res = daten->nrSuche(anfrage);
+
+		work->write(res);
 	}
 
-	// 7) ArbeitsSocket abmelden
-	// ToDo
+	work->close();
 
-// 8) ServerSocket abmelden
-// ToDo
+	server->close();
 }

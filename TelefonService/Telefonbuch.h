@@ -10,15 +10,16 @@ class Telefonbuch
 {
 private:
 	int maxAnzahlEintraege;
-	List <Eintrag*>telefonbuchEintraege; 
+	list<Eintrag*> telefonbuchEintraege; 
 	int anzahlEintraege;
 	
 
 public:
 	void eintragEinfuegen(Eintrag*);
 	void eintragLoeschen(string);
+	bool gibtEintrag(string);
 	string nrSuche(string);
-	List<Eintrag*>& getTelefonbuchEintraege();
+	list<Eintrag*>& getTelefonbuchEintraege();
 	void sortierenNachNamen();
 	void toString();
 	Telefonbuch();

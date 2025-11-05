@@ -7,18 +7,8 @@ using namespace std;
 
 // 2.2 Aufgabe
 Telefonbuch::Telefonbuch()
+	: Telefonbuch(10)
 {
-	anzahlEintraege = 3;
-	maxAnzahlEintraege = 10;
-
-	// Standardeinträge
-	Eintrag* tmp0 = new Eintrag("Betty", "123");
-	eintragEinfuegen(tmp0);
-	Eintrag* tmp1 = new Eintrag("Anton", "456");
-	eintragEinfuegen(tmp1);
-	Eintrag* tmp2 = new Eintrag("Cesar", "789");
-	eintragEinfuegen(tmp2);
-
 }
 
 Telefonbuch::Telefonbuch(int anzahl)
@@ -37,50 +27,104 @@ Telefonbuch::Telefonbuch(int anzahl)
 
 Telefonbuch::~Telefonbuch()
 {
-	telefonbuchEintraege.~List();
+	telefonbuchEintraege.~list();
 }
 
 string Telefonbuch::nrSuche(string such)
 {
-	// ToDo
+	for (Eintrag*& elem : telefonbuchEintraege)
+	{
+		if (elem == nullptr) continue;
+
+		if (elem->getName() == such)
+			return elem->getNr();
+	}
 
 	return "UNKNOWN";
 }
 
-List<Eintrag*>& Telefonbuch::getTelefonbuchEintraege()
+list<Eintrag*>& Telefonbuch::getTelefonbuchEintraege()
 {
 	return telefonbuchEintraege;
 }
 
 void Telefonbuch::sortierenNachNamen()
 {
-	// ToDo
-	// 
-		// Hinweis >> Die add(index: int, obj : T) Methode funktioniert etwas anders als der Ringtausch!
-		// Die Methode fügt das Objekt obj vom Typ T an der Position index in die Liste ein.Alle nachfolgenden Objekte werden um eine Position verschoben.
-		//	Beispiel:
-		//           11; 12; 13; 14;
-		//           11; 12; 55; 13; 14;		
+	if (telefonbuchEintraege.size() < 2) return;
+
+	auto it = next(telefonbuchEintraege.begin()); // zweites Element
+	while (it != telefonbuchEintraege.end())
+	{
+		auto current = it++;  // current = zu verschiebender Knoten, it = nächste Position
+
+		// Finde Position in [begin, current) für current
+		auto pos = telefonbuchEintraege.begin();
+		while (pos != current && (*pos)->getName() <= (*current)->getName())
+		{
+			pos++;
+		}
+
+		// Wenn pos != current, dann splice current vor pos
+		if (pos != current) {
+			// 1. Element an der Position current herausnehmen (liefert Iterator auf das nächste Element)
+			Eintrag* element = *current;
+			current = telefonbuchEintraege.erase(current);
+
+			// 2. Element vor pos wieder einfügen
+			telefonbuchEintraege.insert(pos, element);
+
+		}
+	}
 }
+
 
 void Telefonbuch::toString()
 {
 	cout << "-----Telefonbucheintraege--------" << endl;
-	// ToDo
-}
 
+	for (Eintrag*& elem : telefonbuchEintraege)
+	{
+		std::cout << elem->getName() << " " << elem->getNr() << std::endl;
+	}
+	std::cout << std::endl;
+}
 
 void Telefonbuch::eintragLoeschen(string loesch)
 {
-	// ToDo
+	std::list<Eintrag*> toDelete;
+	for (Eintrag*& elem : telefonbuchEintraege)
+	{
+		if (elem->getName() == loesch)
+			toDelete.push_back(elem);
+	}
+
+	for (Eintrag*& elem : toDelete)
+	{
+		if (elem == nullptr) continue;
+		telefonbuchEintraege.remove(elem);
+	}
 }
 
 
 void Telefonbuch::eintragEinfuegen(Eintrag* einf)
 {
-	// ToDo für Aufgabe 1 notwendig!
+	if (anzahlEintraege >= maxAnzahlEintraege)
+		return;
+
+	bool alreadyExists = gibtEintrag(einf->getName());
+	if (alreadyExists)
+	{
+		delete einf;
+		return;
+	}
+
+	telefonbuchEintraege.push_back(einf);
+	anzahlEintraege++;
+
+	sortierenNachNamen();
 }
 
-
-
-
+bool Telefonbuch::gibtEintrag(string name)
+{
+	return (nrSuche(name) != "UNKNOWN");
+}
