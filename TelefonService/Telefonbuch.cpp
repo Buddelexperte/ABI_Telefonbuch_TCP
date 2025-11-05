@@ -21,6 +21,8 @@ Telefonbuch::Telefonbuch(int anzahl)
 	eintragEinfuegen(tmp0);
 	Eintrag* tmp1 = new Eintrag("Anton", "456");
 	eintragEinfuegen(tmp1);
+	Eintrag* tmp3 = new Eintrag("Dora", "000");
+	eintragEinfuegen(tmp3);
 	Eintrag* tmp2 = new Eintrag("Cesar", "789");
 	eintragEinfuegen(tmp2);
 }
@@ -52,25 +54,28 @@ void Telefonbuch::sortierenNachNamen()
 {
 	if (telefonbuchEintraege.size() < 2) return;
 
-	auto it = next(telefonbuchEintraege.begin()); // zweites Element
+	auto it = next(telefonbuchEintraege.begin()); // Zweites Element
 	while (it != telefonbuchEintraege.end())
 	{
 		auto current = it++;  // current = zu verschiebender Knoten, it = nächste Position
 
-		// Finde Position in [begin, current) für current
-		auto pos = telefonbuchEintraege.begin();
+		// Solange 'current' mit 'pos' nicht erreicht wurde & Namen von 'current' alphabetisch kleiner ist (A < B)
+		auto pos = telefonbuchEintraege.begin(); // Erstes Element
 		while (pos != current && (*pos)->getName() <= (*current)->getName())
 		{
+			// pos erhöhen
 			pos++;
 		}
 
 		// Wenn pos != current, dann splice current vor pos
-		if (pos != current) {
-			// 1. Element an der Position current herausnehmen (liefert Iterator auf das nächste Element)
+		if (pos != current)
+		{
+			// Zu verschiebenden Knoten kopieren
 			Eintrag* element = *current;
+			// Zu verschiebenden Knoten aus der Liste löschen
 			current = telefonbuchEintraege.erase(current);
-
-			// 2. Element vor pos wieder einfügen
+			// Zu verschiebenden Knoten an 'pos' einfügen
+			// (Jetziges Element von 'pos' wird somit nach hinten verschoben)
 			telefonbuchEintraege.insert(pos, element);
 
 		}
