@@ -1,15 +1,18 @@
 #pragma once
+#include <string>
 
 class Eintrag
 {
 private:
-	string name;
-	string telefonnr;
+	std::string name;
+	std::string telefonnr;
+
 public:
-	string getNr ();
-	string getName ();
-	void setNr (string);
-	void setName (string);
-	Eintrag(string, string);
+	Eintrag(std::string, std::string);
 	~Eintrag();
+
+	std::string getNr();
+	std::string getName();
+	void setNr(std::string);
+	void setName(std::string);
 };

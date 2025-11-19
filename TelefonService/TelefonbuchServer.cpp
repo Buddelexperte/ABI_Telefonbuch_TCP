@@ -18,6 +18,11 @@ TelefonbuchServer::TelefonbuchServer(int port)
 
 TelefonbuchServer::~TelefonbuchServer(void)
 {
+    if (server)
+    {
+        server->close();
+    }
+
 	delete server;
 	delete daten;
 }

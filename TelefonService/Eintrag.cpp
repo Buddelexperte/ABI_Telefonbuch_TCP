@@ -5,9 +5,8 @@ using namespace std;
 
 
 Eintrag::Eintrag(string n_init, string nr_init)
+	: name(n_init), telefonnr(nr_init)
 {
-	name = n_init;
-	telefonnr = nr_init;
 }
 
 Eintrag::~Eintrag()

@@ -126,8 +126,14 @@ void Socket::write(char* b, int len)
 
 void Socket::write(std::string s)
 {
+    if (s.empty()) return;
+
     // Strings fuer den Unterricht immer als Zeile mit '\n' senden:
-    s += '\n';
+    if (s[s.size() - 1] != '\n')
+    {
+        s += '\n';
+    }
+
     int total = (int)s.length();
 
     // Einfacher send-Aufruf (fuer die Schule ausreichend)

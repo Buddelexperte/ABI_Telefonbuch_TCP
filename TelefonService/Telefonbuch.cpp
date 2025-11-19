@@ -1,7 +1,9 @@
-#include <iostream>
-#include "List.h"
-#include "Telefonbuch.h"
 #include "Eintrag.h"
+#include "Telefonbuch.h"
+#include <iostream>
+#include <list>
+#include <new>
+#include <string>
 
 using namespace std;
 
@@ -96,10 +98,10 @@ void Telefonbuch::toString()
 void Telefonbuch::eintragLoeschen(string loesch)
 {
 	std::list<Eintrag*> toDelete;
-	for (Eintrag*& elem : telefonbuchEintraege)
+	for (Eintrag*& entry : telefonbuchEintraege)
 	{
-		if (elem->getName() == loesch)
-			toDelete.push_back(elem);
+		if (entry->getName() == loesch)
+			toDelete.push_back(entry);
 	}
 
 	for (Eintrag*& elem : toDelete)

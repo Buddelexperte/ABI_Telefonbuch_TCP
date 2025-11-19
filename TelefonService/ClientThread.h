@@ -11,8 +11,8 @@ private:
     Socket* client;
     Telefonbuch* daten;
 
-    // Hilfsfunktion für Parsing
     void parseCommand(const std::string& input, std::string& cmd, std::string& arg1, std::string& arg2);
+    void sendResult(std::string res);
 
 public:
     ClientThread(Socket* c, Telefonbuch* d)
