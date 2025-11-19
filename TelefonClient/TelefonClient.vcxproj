@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Socket\Socket.cpp" />
-    <ClCompile Include="TelefonClientUebung.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="TelefonClient.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -134,14 +134,16 @@
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Telefonbuch.cpp" />
     <ClCompile Include="TelefonbuchServer.cpp" />
-    <ClCompile Include="TelefonServerUebung.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Socket\Socket.hpp" />
+    <ClInclude Include="ClientThread.h" />
     <ClInclude Include="Eintrag.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Telefonbuch.h" />
     <ClInclude Include="TelefonbuchServer.h" />
+    <ClInclude Include="Thread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

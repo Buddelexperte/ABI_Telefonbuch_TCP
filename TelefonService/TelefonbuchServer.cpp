@@ -1,7 +1,11 @@
-#include <iostream>
-#include <string>
+#include "../Socket/ServerSocket.hpp"
 #include "..\Socket\Socket.hpp"
+#include "ClientThread.h"
+#include "Telefonbuch.h"
 #include "TelefonbuchServer.h"
+#include <iostream>
+#include <new>
+
 using namespace std;
 
 TelefonbuchServer::TelefonbuchServer(int port)
@@ -20,29 +24,13 @@ TelefonbuchServer::~TelefonbuchServer(void)
 
 void TelefonbuchServer::start()
 {
-	string anfrage;
-	string antwort;
+    while (true)
+    {
+        Socket* client = server->accept();  // blockiert nur hier
+        cout << "Client verbunden!" << endl;
 
-	Socket* work = server->accept();
-
-	cout << "Client verbunden!" << endl;
-
-	while (anfrage != "EXIT")
-	{
-		while(!work->dataAvailable()){}
-
-		anfrage = work->readLine();
-
-		std::cout << anfrage;
-
-		if (anfrage == "\0" || anfrage == "EXIT") break;
-
-		string res = daten->nrSuche(anfrage);
-
-		work->write(res);
-	}
-
-	work->close();
-
-	server->close();
+        // Start des Worker-Threads
+        auto* worker = new ClientThread(client, daten);
+        worker->start();  // führt intern run() im neuen Thread aus
+    }
 }
