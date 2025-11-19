@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="..\Socket\ServerSocket.cpp" />
     <ClCompile Include="..\Socket\Socket.cpp" />
+    <ClCompile Include="ClientThread.cpp" />
     <ClCompile Include="Eintrag.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Telefonbuch.cpp" />

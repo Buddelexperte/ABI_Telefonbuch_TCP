@@ -23,14 +23,14 @@ bool TelefonClient::verbinden(string server, int port)
 	cout<<"\nVerbunden mit dem Server"<<endl;
 
 	do{
-		cout << "Name eingeben: - um die Telefonnummer abzurufen\n>> " << flush;
-		cin >> text;
+		cout << "Befehle sind:\n- GET {name}\n- CREATE {name};{nr}\n- DELETE {name}\n>> " << flush;
+		std::getline(cin, text);
 		
 		client_sock->write(text);
 
 		antwort = client_sock->readLine();
 
-		cout << "Telefonnummer von " << text << " lautet: " <<  antwort << endl;
+		cout << "Ergebnis:\n" <<  antwort << endl;
 		cout << endl;
 	}while(text != "EXIT");
 
