@@ -35,7 +35,7 @@ void TelefonbuchServer::start()
         cout << "Client verbunden!" << endl;
 
         // Start des Worker-Threads
-        auto* worker = new ClientThread(client, daten);
+        ClientThread* worker = new ClientThread(client, daten);
         worker->start();  // führt intern run() im neuen Thread aus
     }
 }

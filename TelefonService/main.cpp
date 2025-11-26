@@ -3,7 +3,7 @@
 
 using namespace std;
 #define SERVERPORT 54321
-#define SERVERIP "127.0.0.1"
+#define SERVERIP "10.35.70.86"
 
 
 int main()

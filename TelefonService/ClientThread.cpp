@@ -58,24 +58,15 @@ void ClientThread::sendResult(std::string res)
 
 void ClientThread::run()
 {
-    std::string anfrage;
-
     while (!stopRequestedFlag())
     {
-        while (!client->dataAvailable())
-        {
-            if (stopRequestedFlag())
-            {
-                client->close();
-                delete client;
-                return;
-            }
-        }
+        if (!client->dataAvailable()) continue;
 
-        anfrage = client->readLine();
+        std::string anfrage = client->readLine();
 
         std::string cmd, arg1, arg2;
         parseCommand(anfrage, cmd, arg1, arg2);
+
         std::cout << "\nAnfrage erhalten:\n[" << cmd << "]";
         if (!arg1.empty())
             std::cout << " {Arg1: " << arg1 << "}";
@@ -142,4 +133,6 @@ void ClientThread::run()
 
     client->close();
     delete client;
+
+    //delete this; // Nur möglich, da keine weitere Nutzung des Threads außerhalb passiert
 }
