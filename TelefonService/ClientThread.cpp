@@ -134,5 +134,5 @@ void ClientThread::run()
     client->close();
     delete client;
 
-    //delete this; // Nur möglich, da keine weitere Nutzung des Threads außerhalb passiert
+    //delete this; // Nicht möglich, führt zu abort
 }
